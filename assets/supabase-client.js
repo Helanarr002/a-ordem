@@ -5,8 +5,8 @@
 (function () {
   "use strict";
 
-  var SUPABASE_URL = "https://SEU-PROJETO.supabase.co";
-  var SUPABASE_ANON_KEY = "SUA_ANON_PUBLIC_KEY";
+  var SUPABASE_URL = "https://yhulnfrrewzphdijwofb.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlodWxuZnJyZXd6cGhkaWp3b2ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxNDY4OTUsImV4cCI6MjEwNDcyMjg5NX0.IyMr_ahKnibHEr24pe4O6NLzMlOnt1QPar1t58WV1r4";
 
   if (!window.supabase) {
     console.error("supabase-js não carregou — confira o <script> do CDN antes deste arquivo.");
