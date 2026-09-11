@@ -258,6 +258,7 @@ insert into public.site_content (key, data) values
     {"title": "Mentorias ao vivo", "text": "Toda terça às 20h, com gravação liberada depois."},
     {"title": "Sala de Sinais", "text": "Bônus atualizado toda semana com os setups mapeados."}
   ],
+  "hero_image": "",
   "stats": [],
   "about": {},
   "testimonials": [],

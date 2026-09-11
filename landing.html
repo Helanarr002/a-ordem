@@ -6,22 +6,23 @@
 <title data-content="brand.name">A ORDEM — comunidade de traders de Genisson Silva FX</title>
 <meta name="description" content="A comunidade de traders de Genisson Silva FX: trilha completa de análise técnica, mentorias ao vivo toda terça e Sala de Sinais. Método, disciplina e acompanhamento real.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://comunidade.vip/a-ordem/landing.html">
+<link rel="canonical" href="https://comunidade.vip/landing.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="A ORDEM">
 <meta property="og:title" content="A ORDEM — comunidade de traders de Genisson Silva FX">
 <meta property="og:description" content="Trilha completa, mentorias ao vivo e Sala de Sinais. A comunidade de traders de Genisson Silva FX.">
-<meta property="og:image" content="https://comunidade.vip/a-ordem/assets/banner-genisson.png">
-<meta property="og:url" content="https://comunidade.vip/a-ordem/landing.html">
+<meta property="og:image" content="https://comunidade.vip/assets/banner-genisson.png">
+<meta property="og:url" content="https://comunidade.vip/landing.html">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="A ORDEM — comunidade de traders de Genisson Silva FX">
 <meta name="twitter:description" content="Trilha completa, mentorias ao vivo e Sala de Sinais.">
-<meta name="twitter:image" content="https://comunidade.vip/a-ordem/assets/banner-genisson.png">
+<meta name="twitter:image" content="https://comunidade.vip/assets/banner-genisson.png">
 
-<link rel="icon" type="image/png" href="assets/logo-aordem.png">
-<link rel="apple-touch-icon" href="assets/logo-aordem.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/icon-a-ordem.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,18 +65,34 @@
 
 <main class="wrap">
 
-  <section class="landing-hero">
+  <section class="landing-hero" data-hero>
+    <div class="landing-hero__bg" data-hero-bg></div>
     <span class="hero__tag" data-content="brand.name">A ORDEM</span>
     <h1 data-content="landing.headline">O mercado não recompensa quem tenta. Recompensa quem tem método.</h1>
     <p data-content="landing.subheadline">A comunidade de traders de Genisson Silva FX: trilha completa, mentorias ao vivo e Sala de Sinais.</p>
-    <a class="btn" data-content="landing.cta_url" data-content-attr="href" target="_blank" rel="noopener">
+    <a class="btn" data-cta-link target="_blank" rel="noopener">
       <span data-content="landing.cta_label">Quero fazer parte</span>
     </a>
   </section>
 
+  <div class="landing-trust">
+    <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Área de membros protegida</span>
+    <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Suporte direto com a equipe</span>
+    <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>Mentoria ao vivo toda semana</span>
+  </div>
+
   <section class="landing-stats" data-stats style="display:none"></section>
 
   <section id="recebe" class="landing-highlights" data-highlights></section>
+
+  <section class="landing-how">
+    <h2 class="landing-section-title">Como funciona</h2>
+    <div class="landing-how__grid">
+      <div class="landing-how__step"><span class="landing-how__num">1</span><h3>Garanta seu acesso</h3><p>Clique no botão, finalize e você recebe os dados de acesso à área de membros.</p></div>
+      <div class="landing-how__step"><span class="landing-how__num">2</span><h3>Entre na área de membros</h3><p>Faça login com o e-mail cadastrado e você já cai direto na sua trilha.</p></div>
+      <div class="landing-how__step"><span class="landing-how__num">3</span><h3>Comece pela Trilha da Ordem</h3><p>Siga os módulos na ordem, participe das mentorias ao vivo e acompanhe a Sala de Sinais.</p></div>
+    </div>
+  </section>
 
   <section id="sobre" class="landing-about" data-about style="display:none"></section>
 
@@ -90,7 +107,7 @@
 
   <section class="landing-cta">
     <h2 style="font-family:'Sora',sans-serif;font-size:24px;margin-bottom:16px">Pronto pra entrar na Ordem?</h2>
-    <a class="btn" data-content="landing.cta_url" data-content-attr="href" target="_blank" rel="noopener">
+    <a class="btn" data-cta-link target="_blank" rel="noopener">
       <span data-content="landing.cta_label">Quero fazer parte</span>
     </a>
   </section>
@@ -118,10 +135,26 @@
     });
   }
 
+  var ICONS = [
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg>',
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-6 4 4 5-8 4 6"/></svg>',
+  ];
+
   (async function () {
     if (!window.sb) return;
     var content = await SiteContent.init(["brand", "design_tokens", "landing", "suporte"]);
     var landing = content.landing || {};
+
+    // Hero: imagem de fundo (editável; cai pro banner padrão se não tiver)
+    document.querySelector("[data-hero-bg]").style.backgroundImage =
+      "url('" + (landing.hero_image || "assets/banner-genisson.png") + "')";
+
+    // Botões de CTA: se não tiver link configurado, manda pro login em vez de "#"
+    document.querySelectorAll("[data-cta-link]").forEach(function (a) {
+      if (landing.cta_url) { a.href = landing.cta_url; }
+      else { a.href = "login.html"; a.removeAttribute("target"); }
+    });
 
     // Estatísticas (badges) — só mostra se tiver algum item cadastrado
     var stats = landing.stats || [];
@@ -139,10 +172,10 @@
     // O que você recebe
     var highlights = landing.highlights || [];
     var hWrap = document.querySelector("[data-highlights]");
-    highlights.forEach(function (h) {
+    highlights.forEach(function (h, i) {
       var div = document.createElement("div");
       div.className = "card-flat";
-      div.innerHTML = "<h3>" + escapeHtml(h.title) + "</h3><p>" + escapeHtml(h.text) + "</p>";
+      div.innerHTML = '<div class="card-flat__icon">' + ICONS[i % ICONS.length] + '</div><h3>' + escapeHtml(h.title) + "</h3><p>" + escapeHtml(h.text) + "</p>";
       hWrap.appendChild(div);
     });
 

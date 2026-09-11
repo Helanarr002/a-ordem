@@ -148,8 +148,13 @@
 
   async function initLanding() {
     var landing = await getContent("landing");
-    fillForm($('[data-form="landing"]'), landing);
-    $('[data-form="landing"]').addEventListener("submit", async function (e) {
+    var landingForm = $('[data-form="landing"]');
+    fillForm(landingForm, landing);
+    landingForm.querySelector('[data-upload-for="hero_image"]').addEventListener("change", async function (e) {
+      var url = await uploadMedia(e.target.files[0], "landing");
+      if (url) landingForm.querySelector('[name="hero_image"]').value = url;
+    });
+    landingForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       Object.assign(landing, formToObject(this));
       await setContent("landing", landing);

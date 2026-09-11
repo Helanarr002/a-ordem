@@ -6,4 +6,4 @@ Disallow: /aula.html
 Disallow: /admin.html
 Disallow: /login.html
 
-Sitemap: https://comunidade.vip/a-ordem/sitemap.xml
+Sitemap: https://comunidade.vip/sitemap.xml

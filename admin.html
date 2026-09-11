@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin · A ORDEM</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/png" href="assets/logo-aordem.png">
-<link rel="apple-touch-icon" href="assets/logo-aordem.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/icon-a-ordem.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -92,6 +93,9 @@
           <div><label>Texto do botão</label><input name="cta_label"></div>
           <div><label>Link do botão (checkout/WhatsApp)</label><input name="cta_url"></div>
         </div>
+        <label>Imagem de fundo do topo (opcional — usa o banner padrão se vazio)</label>
+        <input type="file" accept="image/*" data-upload-for="hero_image">
+        <input name="hero_image" placeholder="URL da imagem (preenchido pelo upload)">
         <button class="btn" type="submit">Salvar landing</button>
       </form>
 
