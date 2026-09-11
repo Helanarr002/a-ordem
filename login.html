@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar · A ORDEM</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="auth">
+
+  <!-- Lado da arte -->
+  <div class="auth__art">
+    <div class="auth__art-bg" style="background-image:url('assets/splash-genisson.png')"></div>
+
+    <a class="brand" href="landing.html">
+      <svg class="brand__mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="6" y1="42" x2="42" y2="6" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7c3aed"/><stop offset="0.55" stop-color="#a855f7"/><stop offset="1" stop-color="#d011c9"/>
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="18" stroke="url(#g)" stroke-width="2.4"/>
+        <path d="M16 34 L24 14 L32 34 M19.5 27 H28.5" stroke="url(#g)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 41 L41 8" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand__name" data-content="brand.name">A ORDEM</span>
+        <span class="brand__by" data-content="brand.by">por Genisson Silva FX</span>
+      </span>
+    </a>
+
+    <div class="auth__quote">
+      <h2>O mercado não recompensa quem tenta. Recompensa quem tem método.</h2>
+      <p>Sua área de membros com a trilha completa, as mentorias ao vivo e a Sala de Sinais — tudo em um só lugar.</p>
+      <div class="auth__badges">
+        <div><b>8</b> módulos</div>
+        <div><b>74</b> aulas</div>
+        <div><b>terça 20h</b> ao vivo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lado do formulário -->
+  <div class="auth__form-side">
+    <form class="auth__card" data-login>
+      <h1>Entrar na área de membros</h1>
+      <p>Use o e-mail que você cadastrou na compra.</p>
+
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" placeholder="voce@email.com" autocomplete="email" required>
+      </div>
+
+      <div class="field">
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" placeholder="Sua senha" autocomplete="current-password" required>
+      </div>
+
+      <p data-login-error style="display:none;color:#ff9a9a;font-size:12.5px;margin:-6px 0 4px;"></p>
+
+      <div class="auth__row">
+        <label><input type="checkbox"> Continuar conectado</label>
+        <a href="#" data-forgot>Esqueci minha senha</a>
+      </div>
+
+      <button class="btn btn--block" type="submit"><span>Entrar</span></button>
+
+      <p class="auth__foot">Ainda não é membro? <a href="landing.html">Conheça A ORDEM</a></p>
+    </form>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script src="assets/site-content.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  "use strict";
+  if (window.SiteContent) SiteContent.init(["brand", "design_tokens"]);
+
+  var params = new URLSearchParams(window.location.search);
+  var blocked = params.get("blocked");
+  var errEl = document.querySelector("[data-login-error]");
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.style.display = "block";
+  }
+  if (blocked === "license") showError("Sua licença expirou ou foi revogada. Fale com o suporte.");
+  if (blocked === "config") showError("O site ainda não foi conectado ao Supabase (veja assets/supabase-client.js).");
+
+  // se já tem sessão válida, pula direto pro dashboard
+  (async function () {
+    if (!window.sb) return;
+    var s = await window.sb.auth.getSession();
+    if (s.data.session) window.location.href = "index.html";
+  })();
+
+  var form = document.querySelector("[data-login]");
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    if (!window.sb) { showError("Configuração do Supabase ausente."); return; }
+    errEl.style.display = "none";
+    var btn = form.querySelector("button[type=submit] span");
+    var original = btn.textContent;
+    btn.textContent = "Entrando...";
+
+    var email = document.getElementById("email").value.trim();
+    var senha = document.getElementById("senha").value;
+
+    var resp = await window.sb.auth.signInWithPassword({ email: email, password: senha });
+    if (resp.error) {
+      btn.textContent = original;
+      showError("E-mail ou senha inválidos.");
+      return;
+    }
+    window.location.href = "index.html";
+  });
+
+  document.querySelector("[data-forgot]").addEventListener("click", async function (e) {
+    e.preventDefault();
+    var email = document.getElementById("email").value.trim();
+    if (!email) { showError("Digite seu e-mail acima e clique em novo em \"Esqueci minha senha\"."); return; }
+    if (!window.sb) return;
+    await window.sb.auth.resetPasswordForEmail(email);
+    showError("Se esse e-mail existir, enviamos um link de redefinição de senha.");
+  });
+})();
+</script>
+</body>
+</html>

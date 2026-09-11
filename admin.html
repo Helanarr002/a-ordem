@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aordem-gate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin · A ORDEM</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="admin.html" aria-label="A ORDEM">
+      <svg class="brand__mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="g" x1="6" y1="42" x2="42" y2="6" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#7c3aed"/><stop offset="0.55" stop-color="#a855f7"/><stop offset="1" stop-color="#d011c9"/>
+        </linearGradient></defs>
+        <circle cx="24" cy="24" r="18" stroke="url(#g)" stroke-width="2.4"/>
+        <path d="M16 34 L24 14 L32 34 M19.5 27 H28.5" stroke="url(#g)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 41 L41 8" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span><span class="brand__name">A ORDEM</span><span class="brand__by">Painel Admin</span></span>
+    </a>
+    <nav class="nav__links"></nav>
+    <div class="nav__right">
+      <a class="btn btn--ghost" href="index.html">Ver site</a>
+      <a href="#" class="btn btn--ghost" data-logout>Sair</a>
+    </div>
+  </div>
+</header>
+
+<div class="admin wrap">
+  <aside class="admin__side">
+    <button class="is-active" data-panel="inicio">Início</button>
+    <button data-panel="design">Design</button>
+    <button data-panel="landing">Landing Page</button>
+    <button data-panel="cursos">Cursos</button>
+    <button data-panel="comunidade">Comunidade</button>
+    <button data-panel="mentorias">Mentorias Ao Vivo</button>
+    <button data-panel="sinais">Sala de Sinais</button>
+    <button data-panel="suporte">Suporte</button>
+    <button data-panel="usuarios">Usuários &amp; Licenças</button>
+  </aside>
+
+  <div class="admin__main">
+
+    <!-- INÍCIO -->
+    <section class="admin-panel is-active" data-panel-content="inicio">
+      <h2>Início</h2>
+      <p class="hint">Marca e banners do topo da área de membros.</p>
+      <form class="admin-form" data-form="brand">
+        <label>Nome da marca</label><input name="name" required>
+        <label>Assinatura (ex: "por Fulano")</label><input name="by">
+        <button class="btn" type="submit">Salvar marca</button>
+      </form>
+
+      <h3 style="font-size:15px;margin:26px 0 10px">Banners do hero (carrossel)</h3>
+      <div data-editor="hero_slides"></div>
+      <button class="btn btn--ghost" type="button" data-add="hero_slides">+ Adicionar banner</button>
+      <div style="margin-top:14px"><button class="btn" data-save="hero_slides">Salvar banners</button></div>
+    </section>
+
+    <!-- DESIGN -->
+    <section class="admin-panel" data-panel-content="design">
+      <h2>Design</h2>
+      <p class="hint">Cores da marca. Aplicam em todo o site assim que salvar.</p>
+      <form class="admin-form" data-form="design_tokens">
+        <div class="row3">
+          <div><label>Cor principal</label><input type="color" name="accent"></div>
+          <div><label>Cor secundária</label><input type="color" name="accent_bright"></div>
+          <div><label>Cor de destaque</label><input type="color" name="accent_magenta"></div>
+        </div>
+        <label>Fundo</label><input type="color" name="bg_0">
+        <button class="btn" type="submit">Salvar design</button>
+      </form>
+    </section>
+
+    <!-- LANDING -->
+    <section class="admin-panel" data-panel-content="landing">
+      <h2>Landing Page</h2>
+      <p class="hint">Página pública de vendas (landing.html).</p>
+      <form class="admin-form" data-form="landing">
+        <label>Título principal</label><textarea name="headline" required></textarea>
+        <label>Subtítulo</label><textarea name="subheadline"></textarea>
+        <div class="row2">
+          <div><label>Texto do botão</label><input name="cta_label"></div>
+          <div><label>Link do botão (checkout/WhatsApp)</label><input name="cta_url"></div>
+        </div>
+        <button class="btn" type="submit">Salvar landing</button>
+      </form>
+      <h3 style="font-size:15px;margin:26px 0 10px">"O que você recebe" (cards)</h3>
+      <div data-editor="landing_highlights"></div>
+      <button class="btn btn--ghost" type="button" data-add="landing_highlights">+ Adicionar card</button>
+      <div style="margin-top:14px"><button class="btn" data-save="landing_highlights">Salvar cards</button></div>
+    </section>
+
+    <!-- CURSOS -->
+    <section class="admin-panel" data-panel-content="cursos">
+      <h2>Cursos</h2>
+      <p class="hint">Módulos e aulas da trilha.</p>
+
+      <div class="admin-list" data-list="modules"></div>
+      <button class="btn btn--ghost" style="margin-top:10px" data-new="module">+ Novo módulo</button>
+
+      <form class="admin-form" data-form="module" style="margin-top:22px;display:none">
+        <input type="hidden" name="id">
+        <label>Título do módulo</label><input name="title" required>
+        <label>Descrição</label><textarea name="description"></textarea>
+        <div class="row2">
+          <div><label>Ordem</label><input name="order_index" type="number" value="0"></div>
+          <div><label>Publicado</label><select name="published"><option value="true">Sim</option><option value="false">Não</option></select></div>
+        </div>
+        <label>Capa do módulo</label>
+        <input type="file" accept="image/*" data-upload-for="cover_image_url">
+        <input name="cover_image_url" placeholder="URL da capa (preenchido pelo upload)">
+        <div style="display:flex;gap:10px">
+          <button class="btn" type="submit">Salvar módulo</button>
+          <button class="btn btn--ghost" type="button" data-cancel-module>Cancelar</button>
+        </div>
+      </form>
+
+      <div data-lessons-section style="display:none;margin-top:34px;border-top:1px solid var(--border);padding-top:22px">
+        <h3 style="font-size:15px;margin-bottom:4px">Aulas de "<span data-current-module-title></span>"</h3>
+        <p class="hint">Vídeo do YouTube: cole a URL (não listada) ou só o ID.</p>
+        <div class="admin-list" data-list="lessons"></div>
+        <button class="btn btn--ghost" style="margin-top:10px" data-new="lesson">+ Nova aula</button>
+
+        <form class="admin-form" data-form="lesson" style="margin-top:18px;display:none">
+          <input type="hidden" name="id">
+          <label>Título da aula</label><input name="title" required>
+          <label>Descrição</label><textarea name="description"></textarea>
+          <div class="row2">
+            <div><label>URL ou ID do vídeo (YouTube não listado)</label><input name="video_id"></div>
+            <div><label>Duração (min)</label><input name="duration_min" type="number" value="0"></div>
+          </div>
+          <div class="row2">
+            <div><label>Ordem</label><input name="order_index" type="number" value="0"></div>
+            <div><label>Publicada</label><select name="published"><option value="true">Sim</option><option value="false">Não</option></select></div>
+          </div>
+          <label>Materiais (PDF, links)</label>
+          <div data-editor="lesson_materials"></div>
+          <button class="btn btn--ghost" type="button" data-add="lesson_materials">+ Adicionar material</button>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <button class="btn" type="submit">Salvar aula</button>
+            <button class="btn btn--ghost" type="button" data-cancel-lesson>Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- COMUNIDADE -->
+    <section class="admin-panel" data-panel-content="comunidade">
+      <h2>Comunidade</h2>
+      <form class="admin-form" data-form="comunidade">
+        <label>Título</label><input name="title">
+        <label>Texto</label><textarea name="text"></textarea>
+        <div class="row2">
+          <div><label>Texto do botão</label><input name="cta_label"></div>
+          <div><label>Link (Discord/Telegram/WhatsApp)</label><input name="cta_url"></div>
+        </div>
+        <button class="btn" type="submit">Salvar comunidade</button>
+      </form>
+    </section>
+
+    <!-- MENTORIAS -->
+    <section class="admin-panel" data-panel-content="mentorias">
+      <h2>Mentorias Ao Vivo</h2>
+      <p class="hint">Gravações que aparecem na esteira da Início.</p>
+      <div class="admin-list" data-posts-list="mentoria"></div>
+      <button class="btn btn--ghost" style="margin-top:10px" data-posts-new="mentoria">+ Nova mentoria</button>
+      <div data-posts-form-wrap="mentoria"></div>
+    </section>
+
+    <!-- SALA DE SINAIS -->
+    <section class="admin-panel" data-panel-content="sinais">
+      <h2>Sala de Sinais</h2>
+      <div class="admin-list" data-posts-list="sinal"></div>
+      <button class="btn btn--ghost" style="margin-top:10px" data-posts-new="sinal">+ Novo post</button>
+      <div data-posts-form-wrap="sinal"></div>
+    </section>
+
+    <!-- SUPORTE -->
+    <section class="admin-panel" data-panel-content="suporte">
+      <h2>Suporte</h2>
+      <form class="admin-form" data-form="suporte">
+        <label>Texto de suporte</label><textarea name="text"></textarea>
+        <div class="row2">
+          <div><label>Link do WhatsApp</label><input name="whatsapp_url"></div>
+          <div><label>E-mail</label><input name="email"></div>
+        </div>
+        <button class="btn" type="submit">Salvar suporte</button>
+      </form>
+      <h3 style="font-size:15px;margin:26px 0 10px">Perguntas frequentes</h3>
+      <div data-editor="suporte_faq"></div>
+      <button class="btn btn--ghost" type="button" data-add="suporte_faq">+ Adicionar pergunta</button>
+      <div style="margin-top:14px"><button class="btn" data-save="suporte_faq">Salvar FAQ</button></div>
+    </section>
+
+    <!-- USUÁRIOS -->
+    <section class="admin-panel" data-panel-content="usuarios">
+      <h2>Usuários &amp; Licenças</h2>
+      <p class="hint">Criar acesso cria a conta e a licença de uma vez. A validade é automática — passou da data, o acesso para sozinho.</p>
+      <button class="btn" data-new="user">+ Novo usuário</button>
+
+      <form class="admin-form" data-form="user" style="margin-top:16px;display:none">
+        <div class="row2">
+          <div><label>Nome</label><input name="full_name" required></div>
+          <div><label>E-mail</label><input name="email" type="email" required></div>
+        </div>
+        <div class="row2">
+          <div><label>Plano</label><input name="plan" value="padrao"></div>
+          <div><label>Validade (vazio = sem validade)</label><input name="expires_at" type="date"></div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn" type="submit">Criar usuário</button>
+          <button class="btn btn--ghost" type="button" data-cancel-user>Cancelar</button>
+        </div>
+      </form>
+
+      <div class="admin-list" data-list="users" style="margin-top:22px"></div>
+    </section>
+
+  </div>
+</div>
+
+<div data-toast-slot></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script src="assets/auth-guard.js"></script>
+<script src="assets/admin.js"></script>
+</body>
+</html>

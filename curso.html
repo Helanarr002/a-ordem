@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aordem-gate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curso · A ORDEM</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="A ORDEM">
+      <svg class="brand__mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="6" y1="42" x2="42" y2="6" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7c3aed"/><stop offset="0.55" stop-color="#a855f7"/><stop offset="1" stop-color="#d011c9"/>
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="18" stroke="url(#g)" stroke-width="2.4"/>
+        <path d="M16 34 L24 14 L32 34 M19.5 27 H28.5" stroke="url(#g)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 41 L41 8" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand__name" data-content="brand.name">A ORDEM</span>
+        <span class="brand__by" data-content="brand.by">por Genisson Silva FX</span>
+      </span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html">Início</a>
+      <a href="curso.html" class="is-active">Cursos</a>
+      <a href="index.html#comunidade">Comunidade</a>
+      <a href="index.html#sinais">Sala de Sinais</a>
+      <a href="index.html#suporte">Suporte</a>
+      <a href="admin.html" data-admin-link style="display:none">Admin</a>
+    </nav>
+    <div class="nav__right">
+      <div class="avatar" data-avatar>--</div>
+      <button class="nav__burger" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="page-head">
+    <div class="crumb"><a href="index.html">Início</a> &nbsp;/&nbsp; <a href="curso.html">Trilha da Ordem</a> &nbsp;/&nbsp; <span data-mod-title>...</span></div>
+    <h1 data-mod-h1>Carregando…</h1>
+    <p data-mod-desc></p>
+    <div class="page-head__stats">
+      <div><b data-mod-lessons>0</b> aulas</div>
+      <div><b data-mod-duration>0 min</b> de conteúdo</div>
+    </div>
+    <div class="page-head__bar">
+      <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-dim)">
+        <div class="bar" style="flex:1"><i data-mod-bar style="width:0%"></i></div>
+        <span class="pct" data-mod-pct>0% concluído</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lessons-grid" data-lessons-grid></section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span class="brand__name" data-content="brand.name">A ORDEM</span>
+    <span>© 2026 · <span data-content="brand.by">Genisson Silva FX</span></span>
+    <a href="index.html#suporte">Suporte</a>
+    <a href="#" data-logout style="margin-left:auto">Sair</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script src="assets/auth-guard.js"></script>
+<script src="assets/site-content.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  function escapeHtml(s) {
+    return String(s || "").replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  var moduleId = new URLSearchParams(window.location.search).get("id");
+
+  function checkSvg() {
+    return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>';
+  }
+  function goSvg() {
+    return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>';
+  }
+
+  function lessonRow(lesson, idx, done) {
+    var a = document.createElement("a");
+    a.className = "lrow" + (done ? " is-done" : "");
+    a.href = "aula.html?id=" + lesson.id;
+    a.dataset.lesson = lesson.id;
+    a.innerHTML =
+      '<span class="lrow__check">' + checkSvg() + '</span>' +
+      '<span class="lrow__idx">' + String(idx + 1).padStart(2, "0") + '</span>' +
+      '<span class="lrow__info"><h3>' + escapeHtml(lesson.title) + '</h3><span>' + (lesson.duration_min || 0) + ' min</span></span>' +
+      '<span class="lrow__go">' + goSvg() + '</span>';
+    return a;
+  }
+
+  async function toggleComplete(userId, lessonId, makeDone) {
+    if (makeDone) {
+      await window.sb.from("lesson_progress").upsert({ user_id: userId, lesson_id: lessonId, completed: true, updated_at: new Date().toISOString() });
+    } else {
+      await window.sb.from("lesson_progress").delete().eq("user_id", userId).eq("lesson_id", lessonId);
+    }
+  }
+
+  function updateBar(done, total) {
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    document.querySelector("[data-mod-bar]").style.width = pct + "%";
+    document.querySelector("[data-mod-pct]").textContent = pct + "% concluído";
+  }
+
+  async function boot(ctx) {
+    document.querySelector("[data-avatar]").textContent =
+      (ctx.profile.full_name || ctx.profile.email || "?").trim().slice(0, 2).toUpperCase();
+    if (ctx.isAdmin) document.querySelector("[data-admin-link]").style.display = "";
+    await SiteContent.init(["brand"]);
+
+    if (!moduleId) { window.location.href = "index.html"; return; }
+
+    var modResp = await window.sb.from("modules").select("*").eq("id", moduleId).single();
+    var mod = modResp.data;
+    if (!mod) { window.location.href = "index.html"; return; }
+
+    document.title = mod.title + " · A ORDEM";
+    document.querySelector("[data-mod-title]").textContent = mod.title;
+    document.querySelector("[data-mod-h1]").textContent = mod.title;
+    document.querySelector("[data-mod-desc]").textContent = mod.description || "";
+
+    var lessonsResp = await window.sb.from("lessons").select("*").eq("module_id", moduleId).eq("published", true).order("order_index");
+    var lessons = lessonsResp.data || [];
+    var totalMin = lessons.reduce(function (s, l) { return s + (l.duration_min || 0); }, 0);
+    document.querySelector("[data-mod-lessons]").textContent = lessons.length;
+    document.querySelector("[data-mod-duration]").textContent = totalMin + " min";
+
+    var progResp = await window.sb.from("lesson_progress").select("lesson_id,completed").eq("user_id", ctx.user.id);
+    var doneSet = {};
+    (progResp.data || []).forEach(function (r) { if (r.completed) doneSet[r.lesson_id] = true; });
+
+    var grid = document.querySelector("[data-lessons-grid]");
+    lessons.forEach(function (lesson, idx) {
+      var row = lessonRow(lesson, idx, !!doneSet[lesson.id]);
+      grid.appendChild(row);
+      row.querySelector(".lrow__check").addEventListener("click", async function (e) {
+        e.preventDefault();
+        var nowDone = !row.classList.contains("is-done");
+        row.classList.toggle("is-done", nowDone);
+        if (nowDone) doneSet[lesson.id] = true; else delete doneSet[lesson.id];
+        updateBar(Object.keys(doneSet).filter(function (id) { return lessons.some(function (l) { return l.id === id; }); }).length, lessons.length);
+        await toggleComplete(ctx.user.id, lesson.id, nowDone);
+      });
+    });
+    updateBar(Object.keys(doneSet).length, lessons.length);
+  }
+
+  document.querySelector("[data-logout]").addEventListener("click", function (e) {
+    e.preventDefault();
+    AordemGuard.logout();
+  });
+
+  AordemGuard.requireAccess({ admin: false }).then(boot);
+})();
+</script>
+</body>
+</html>

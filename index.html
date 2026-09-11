@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aordem-gate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A ORDEM — Área de Membros</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="A ORDEM">
+      <svg class="brand__mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="6" y1="42" x2="42" y2="6" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7c3aed"/><stop offset="0.55" stop-color="#a855f7"/><stop offset="1" stop-color="#d011c9"/>
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="18" stroke="url(#g)" stroke-width="2.4"/>
+        <path d="M16 34 L24 14 L32 34 M19.5 27 H28.5" stroke="url(#g)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 41 L41 8" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand__name" data-content="brand.name">A ORDEM</span>
+        <span class="brand__by" data-content="brand.by">por Genisson Silva FX</span>
+      </span>
+    </a>
+
+    <nav class="nav__links">
+      <a href="index.html" class="is-active">Início</a>
+      <a href="curso.html">Cursos</a>
+      <a href="index.html#comunidade">Comunidade</a>
+      <a href="index.html#sinais">Sala de Sinais</a>
+      <a href="index.html#suporte">Suporte</a>
+      <a href="admin.html" data-admin-link style="display:none">Admin</a>
+    </nav>
+
+    <div class="nav__right">
+      <div class="avatar" data-avatar title="">--</div>
+      <button class="nav__burger" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= HERO / BANNERS ================= -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__inner">
+      <span class="hero__tag"></span>
+      <h1></h1>
+      <p></p>
+      <div class="hero__actions">
+        <a class="btn" href="curso.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span>Continuar assistindo</span>
+        </a>
+        <a class="btn btn--ghost" href="curso.html">Ver trilha completa</a>
+      </div>
+    </div>
+    <div class="hero__dots"></div>
+  </section>
+
+  <!-- ================= CONTINUE ASSISTINDO ================= -->
+  <section class="section" data-section="continue" style="display:none">
+    <div class="section__head">
+      <h2>Continue de onde parou</h2>
+      <span class="count" data-continue-count></span>
+    </div>
+    <div class="rail">
+      <button class="rail__arrow rail__arrow--prev" aria-label="Anterior">‹</button>
+      <button class="rail__arrow rail__arrow--next" aria-label="Próximo">›</button>
+      <div class="rail__track" data-continue-track></div>
+    </div>
+  </section>
+
+  <!-- ================= TRILHA DA ORDEM ================= -->
+  <section class="section" id="cursos">
+    <div class="section__head">
+      <h2>Trilha da Ordem</h2>
+      <span class="count" data-modules-count></span>
+      <a href="curso.html">Ver tudo</a>
+    </div>
+    <div class="rail">
+      <button class="rail__arrow rail__arrow--prev" aria-label="Anterior">‹</button>
+      <button class="rail__arrow rail__arrow--next" aria-label="Próximo">›</button>
+      <div class="rail__track" data-modules-track></div>
+    </div>
+  </section>
+
+  <!-- ================= MENTORIAS AO VIVO ================= -->
+  <section class="section" id="mentorias">
+    <div class="section__head">
+      <h2>Mentorias Ao Vivo</h2>
+      <span class="count">Toda terça, 20h</span>
+    </div>
+    <div class="rail">
+      <button class="rail__arrow rail__arrow--prev" aria-label="Anterior">‹</button>
+      <button class="rail__arrow rail__arrow--next" aria-label="Próximo">›</button>
+      <div class="rail__track" data-posts-track="mentoria"></div>
+    </div>
+  </section>
+
+  <!-- ================= COMUNIDADE ================= -->
+  <section class="section" id="comunidade">
+    <div class="section__head">
+      <h2 data-content="comunidade.title">Comunidade</h2>
+    </div>
+    <div class="card-flat" style="max-width:640px">
+      <p data-content="comunidade.text" style="margin:0 0 16px;color:var(--text-dim)"></p>
+      <a class="btn" data-content="comunidade.cta_url" data-content-attr="href" target="_blank" rel="noopener">
+        <span data-content="comunidade.cta_label">Entrar no grupo</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= SALA DE SINAIS ================= -->
+  <section class="section" id="sinais">
+    <div class="section__head">
+      <h2>Sala de Sinais <span class="count">· bônus, atualizada toda semana</span></h2>
+    </div>
+    <div class="rail">
+      <div class="rail__track" data-posts-track="sinal"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="suporte">
+  <div class="wrap">
+    <span class="brand__name" data-content="brand.name">A ORDEM</span>
+    <span>© 2026 · <span data-content="brand.by">Genisson Silva FX</span></span>
+    <a href="#" data-content="suporte.whatsapp_url" data-content-attr="href">Suporte</a>
+    <a href="landing.html">Sobre</a>
+    <a href="#" data-logout style="margin-left:auto">Sair</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script src="assets/auth-guard.js"></script>
+<script src="assets/site-content.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/video-player.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  function coverStyle(url, idx) {
+    var cv = "cv" + (((idx % 8) + 8) % 8 + 1);
+    if (url) return { cls: cv, style: "background-image:url('" + url + "');background-size:cover;background-position:center" };
+    return { cls: cv, style: "" };
+  }
+
+  function moduleCard(mod, doneCount, totalCount) {
+    var pct = totalCount ? Math.round((doneCount / totalCount) * 100) : 0;
+    var cov = coverStyle(mod.cover_image_url, mod.order_index || 0);
+    var a = document.createElement("a");
+    a.className = "card";
+    a.href = "curso.html?id=" + mod.id;
+    a.innerHTML =
+      '<div class="card__cover ' + cov.cls + ' card__cover--orb" style="' + cov.style + '">' +
+        '<span class="card__num">MÓDULO ' + String((mod.order_index || 0) + 1).padStart(2, "0") + '</span>' +
+        '<span class="card__cover-title">' + escapeHtml(mod.title) + '</span>' +
+        '<span class="card__play"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></span>' +
+      '</div>' +
+      '<div class="card__body">' +
+        '<p class="card__title">' + escapeHtml(mod.title) + '</p>' +
+        '<p class="card__meta">' + (mod.lessonCount || 0) + ' aulas</p>' +
+        '<div class="card__progress"><div class="bar"><i style="width:' + pct + '%"></i></div><span>' + pct + '%</span></div>' +
+      '</div>';
+    return a;
+  }
+
+  function postCard(post, idx) {
+    var cov = coverStyle(post.image_url, idx);
+    var a = document.createElement("a");
+    a.className = "card";
+    a.href = "#";
+    a.innerHTML =
+      '<div class="card__cover ' + cov.cls + ' card__cover--orb" style="' + cov.style + '">' +
+        '<span class="card__num">' + escapeHtml(post.category || "") + '</span>' +
+        '<span class="card__cover-title">' + escapeHtml(post.title) + '</span>' +
+        (post.video_id ? '<span class="card__play"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></span>' : "") +
+      '</div>' +
+      '<div class="card__body"><p class="card__title">' + escapeHtml(post.title) + '</p></div>';
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      Aordem.openPostModal(post);
+    });
+    return a;
+  }
+
+  function lessonCard(lesson, mod, pct) {
+    var a = document.createElement("a");
+    a.className = "lesson-card";
+    a.href = "aula.html?id=" + lesson.id;
+    a.innerHTML =
+      '<div class="lesson-card__thumb cv' + ((mod.order_index % 8) + 1) + '">' +
+        '<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M8 5v14l11-7z" fill="#fff"/></svg>' +
+      '</div>' +
+      '<div class="lesson-card__body">' +
+        '<span class="lesson-card__mod">' + escapeHtml(mod.title) + '</span>' +
+        '<span class="lesson-card__title">' + escapeHtml(lesson.title) + '</span>' +
+        '<div class="lesson-card__foot"><div class="bar"><i style="width:' + pct + '%"></i></div><span>' + pct + '%</span></div>' +
+      '</div>';
+    return a;
+  }
+
+  function escapeHtml(s) {
+    return String(s || "").replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  async function boot(ctx) {
+    document.querySelector("[data-avatar]").textContent =
+      (ctx.profile.full_name || ctx.profile.email || "?").trim().slice(0, 2).toUpperCase();
+    if (ctx.isAdmin) document.querySelector("[data-admin-link]").style.display = "";
+
+    var content = await SiteContent.init(["brand", "design_tokens", "comunidade", "suporte"]);
+    var heroResp = await window.sb.from("site_content").select("data").eq("key", "hero_slides").single();
+    var slides = (heroResp.data && heroResp.data.data) || [];
+    Aordem.initHero(slides);
+
+    var modsResp = await window.sb.from("modules").select("*").eq("published", true).order("order_index");
+    var modules = modsResp.data || [];
+
+    var lessonsResp = await window.sb.from("lessons").select("*").eq("published", true).order("order_index");
+    var lessons = lessonsResp.data || [];
+
+    var progResp = await window.sb.from("lesson_progress").select("lesson_id,completed").eq("user_id", ctx.user.id);
+    var doneSet = {};
+    (progResp.data || []).forEach(function (r) { if (r.completed) doneSet[r.lesson_id] = true; });
+
+    var lessonsByModule = {};
+    lessons.forEach(function (l) {
+      (lessonsByModule[l.module_id] = lessonsByModule[l.module_id] || []).push(l);
+    });
+
+    var modulesTrack = document.querySelector("[data-modules-track]");
+    var totalLessons = 0, totalDone = 0;
+    modules.forEach(function (mod) {
+      var modLessons = lessonsByModule[mod.id] || [];
+      mod.lessonCount = modLessons.length;
+      var done = modLessons.filter(function (l) { return doneSet[l.id]; }).length;
+      totalLessons += modLessons.length; totalDone += done;
+      modulesTrack.appendChild(moduleCard(mod, done, modLessons.length));
+    });
+    document.querySelector("[data-modules-count]").textContent = modules.length + " módulos · " + totalLessons + " aulas";
+
+    // Continue assistindo: primeira aula não concluída de cada módulo com progresso > 0
+    var continueTrack = document.querySelector("[data-continue-track]");
+    var continueItems = [];
+    modules.forEach(function (mod) {
+      var modLessons = (lessonsByModule[mod.id] || []).slice().sort(function (a, b) { return a.order_index - b.order_index; });
+      var doneCount = modLessons.filter(function (l) { return doneSet[l.id]; }).length;
+      if (doneCount === 0 || doneCount === modLessons.length) return;
+      var next = modLessons.find(function (l) { return !doneSet[l.id]; });
+      if (next) continueItems.push({ lesson: next, mod: mod, pct: Math.round((doneCount / modLessons.length) * 100) });
+    });
+    if (continueItems.length) {
+      document.querySelector('[data-section="continue"]').style.display = "";
+      document.querySelector("[data-continue-count]").textContent = continueItems.length + " aulas em andamento";
+      continueItems.forEach(function (it) { continueTrack.appendChild(lessonCard(it.lesson, it.mod, it.pct)); });
+    }
+
+    var mentoriasResp = await window.sb.from("posts").select("*").eq("type", "mentoria").eq("published", true).order("order_index");
+    (mentoriasResp.data || []).forEach(function (p, i) {
+      document.querySelector('[data-posts-track="mentoria"]').appendChild(postCard(p, i));
+    });
+
+    var sinaisResp = await window.sb.from("posts").select("*").eq("type", "sinal").eq("published", true).order("order_index");
+    (sinaisResp.data || []).forEach(function (p, i) {
+      document.querySelector('[data-posts-track="sinal"]').appendChild(postCard(p, i));
+    });
+
+    Aordem.initRails();
+  }
+
+  document.querySelector("[data-logout]").addEventListener("click", function (e) {
+    e.preventDefault();
+    AordemGuard.logout();
+  });
+
+  AordemGuard.requireAccess({ admin: false }).then(boot);
+})();
+</script>
+</body>
+</html>

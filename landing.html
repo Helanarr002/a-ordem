@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-content="brand.name">A ORDEM</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="landing.html" aria-label="A ORDEM">
+      <svg class="brand__mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="6" y1="42" x2="42" y2="6" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7c3aed"/><stop offset="0.55" stop-color="#a855f7"/><stop offset="1" stop-color="#d011c9"/>
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="18" stroke="url(#g)" stroke-width="2.4"/>
+        <path d="M16 34 L24 14 L32 34 M19.5 27 H28.5" stroke="url(#g)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 41 L41 8" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand__name" data-content="brand.name">A ORDEM</span>
+        <span class="brand__by" data-content="brand.by">por Genisson Silva FX</span>
+      </span>
+    </a>
+    <nav class="nav__links">
+      <a href="landing.html#recebe">O que você recebe</a>
+      <a href="landing.html#faq">Dúvidas</a>
+    </nav>
+    <div class="nav__right">
+      <a class="btn btn--ghost" href="login.html">Entrar</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="landing-hero">
+    <span class="hero__tag" data-content="brand.name">A ORDEM</span>
+    <h1 data-content="landing.headline">O mercado não recompensa quem tenta. Recompensa quem tem método.</h1>
+    <p data-content="landing.subheadline">A comunidade de traders de Genisson Silva FX: trilha completa, mentorias ao vivo e Sala de Sinais.</p>
+    <a class="btn" data-content="landing.cta_url" data-content-attr="href" target="_blank" rel="noopener">
+      <span data-content="landing.cta_label">Quero fazer parte</span>
+    </a>
+  </section>
+
+  <section id="recebe" class="landing-highlights" data-highlights></section>
+
+  <section id="faq" class="landing-faq" data-faq></section>
+
+  <section class="landing-cta">
+    <h2 style="font-family:'Sora',sans-serif;font-size:24px;margin-bottom:16px">Pronto pra entrar na Ordem?</h2>
+    <a class="btn" data-content="landing.cta_url" data-content-attr="href" target="_blank" rel="noopener">
+      <span data-content="landing.cta_label">Quero fazer parte</span>
+    </a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span class="brand__name" data-content="brand.name">A ORDEM</span>
+    <span>© 2026 · <span data-content="brand.by">Genisson Silva FX</span></span>
+    <a href="#" data-content="suporte.whatsapp_url" data-content-attr="href">Suporte</a>
+    <a href="login.html" style="margin-left:auto">Já sou aluno</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script src="assets/site-content.js"></script>
+<script>
+(function () {
+  "use strict";
+  function escapeHtml(s) {
+    return String(s || "").replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  (async function () {
+    if (!window.sb) return;
+    var content = await SiteContent.init(["brand", "design_tokens", "landing", "suporte"]);
+
+    var highlights = (content.landing && content.landing.highlights) || [];
+    var hWrap = document.querySelector("[data-highlights]");
+    highlights.forEach(function (h) {
+      var div = document.createElement("div");
+      div.className = "card-flat";
+      div.innerHTML = "<h3>" + escapeHtml(h.title) + "</h3><p>" + escapeHtml(h.text) + "</p>";
+      hWrap.appendChild(div);
+    });
+
+    var faq = (content.suporte && content.suporte.faq) || [];
+    var fWrap = document.querySelector("[data-faq]");
+    faq.forEach(function (f) {
+      var details = document.createElement("details");
+      details.innerHTML = "<summary>" + escapeHtml(f.q) + "</summary><p>" + escapeHtml(f.a) + "</p>";
+      fWrap.appendChild(details);
+    });
+  })();
+})();
+</script>
+</body>
+</html>
