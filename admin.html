@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin · A ORDEM</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/logo-aordem.png">
+<link rel="apple-touch-icon" href="assets/logo-aordem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -88,10 +94,47 @@
         </div>
         <button class="btn" type="submit">Salvar landing</button>
       </form>
+
+      <h3 style="font-size:15px;margin:26px 0 10px">Números (aparece só se tiver pelo menos 1)</h3>
+      <div data-editor="landing_stats"></div>
+      <button class="btn btn--ghost" type="button" data-add="landing_stats">+ Adicionar número</button>
+      <div style="margin-top:14px"><button class="btn" data-save="landing_stats">Salvar números</button></div>
+
       <h3 style="font-size:15px;margin:26px 0 10px">"O que você recebe" (cards)</h3>
       <div data-editor="landing_highlights"></div>
       <button class="btn btn--ghost" type="button" data-add="landing_highlights">+ Adicionar card</button>
       <div style="margin-top:14px"><button class="btn" data-save="landing_highlights">Salvar cards</button></div>
+
+      <h3 style="font-size:15px;margin:26px 0 10px">Sobre o mentor (aparece só se preencher)</h3>
+      <form class="admin-form" data-form="landing_about">
+        <label>Título</label><input name="title" placeholder='Ex: "Quem é Genisson Silva"'>
+        <label>Texto</label><textarea name="text"></textarea>
+        <label>Foto</label>
+        <input type="file" accept="image/*" data-upload-for="image_url">
+        <input name="image_url" placeholder="URL da foto (preenchido pelo upload)">
+        <button class="btn" type="submit">Salvar sobre</button>
+      </form>
+
+      <h3 style="font-size:15px;margin:26px 0 10px">Depoimentos (aparece só se tiver pelo menos 1 real)</h3>
+      <div data-editor="landing_testimonials"></div>
+      <button class="btn btn--ghost" type="button" data-add="landing_testimonials">+ Adicionar depoimento</button>
+      <div style="margin-top:14px"><button class="btn" data-save="landing_testimonials">Salvar depoimentos</button></div>
+
+      <h3 style="font-size:15px;margin:26px 0 10px">Plano / preço (aparece só se preencher o título)</h3>
+      <form class="admin-form" data-form="landing_pricing">
+        <label>Título do plano</label><input name="title" placeholder='Ex: "Acesso A Ordem"'>
+        <div class="row2">
+          <div><label>Preço (texto livre)</label><input name="price" placeholder="R$ 97"></div>
+          <div><label>Período</label><input name="period" placeholder="mês"></div>
+        </div>
+        <div class="row2">
+          <div><label>Texto do botão</label><input name="cta_label" placeholder="Quero fazer parte"></div>
+          <div><label>Link do botão</label><input name="cta_url"></div>
+        </div>
+        <label>O que está incluso (uma linha por item)</label>
+        <textarea name="features_text" placeholder="Trilha completa&#10;Mentorias ao vivo&#10;Sala de Sinais"></textarea>
+        <button class="btn" type="submit">Salvar plano</button>
+      </form>
     </section>
 
     <!-- CURSOS -->

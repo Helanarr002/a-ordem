@@ -3,7 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-content="brand.name">A ORDEM</title>
+<title data-content="brand.name">A ORDEM — comunidade de traders de Genisson Silva FX</title>
+<meta name="description" content="A comunidade de traders de Genisson Silva FX: trilha completa de análise técnica, mentorias ao vivo toda terça e Sala de Sinais. Método, disciplina e acompanhamento real.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://comunidade.vip/a-ordem/landing.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="A ORDEM">
+<meta property="og:title" content="A ORDEM — comunidade de traders de Genisson Silva FX">
+<meta property="og:description" content="Trilha completa, mentorias ao vivo e Sala de Sinais. A comunidade de traders de Genisson Silva FX.">
+<meta property="og:image" content="https://comunidade.vip/a-ordem/assets/banner-genisson.png">
+<meta property="og:url" content="https://comunidade.vip/a-ordem/landing.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A ORDEM — comunidade de traders de Genisson Silva FX">
+<meta name="twitter:description" content="Trilha completa, mentorias ao vivo e Sala de Sinais.">
+<meta name="twitter:image" content="https://comunidade.vip/a-ordem/assets/banner-genisson.png">
+
+<link rel="icon" type="image/png" href="assets/logo-aordem.png">
+<link rel="apple-touch-icon" href="assets/logo-aordem.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -28,6 +51,9 @@
     </a>
     <nav class="nav__links">
       <a href="landing.html#recebe">O que você recebe</a>
+      <a href="landing.html#sobre">Sobre</a>
+      <a href="landing.html#depoimentos" data-nav-depoimentos style="display:none">Depoimentos</a>
+      <a href="landing.html#planos" data-nav-planos style="display:none">Planos</a>
       <a href="landing.html#faq">Dúvidas</a>
     </nav>
     <div class="nav__right">
@@ -47,7 +73,18 @@
     </a>
   </section>
 
+  <section class="landing-stats" data-stats style="display:none"></section>
+
   <section id="recebe" class="landing-highlights" data-highlights></section>
+
+  <section id="sobre" class="landing-about" data-about style="display:none"></section>
+
+  <section id="depoimentos" class="landing-testimonials" data-testimonials-wrap style="display:none">
+    <h2 class="landing-section-title">O que os alunos dizem</h2>
+    <div class="landing-testimonials__grid" data-testimonials></div>
+  </section>
+
+  <section id="planos" class="landing-pricing" data-pricing-wrap style="display:none"></section>
 
   <section id="faq" class="landing-faq" data-faq></section>
 
@@ -80,11 +117,27 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+
   (async function () {
     if (!window.sb) return;
     var content = await SiteContent.init(["brand", "design_tokens", "landing", "suporte"]);
+    var landing = content.landing || {};
 
-    var highlights = (content.landing && content.landing.highlights) || [];
+    // Estatísticas (badges) — só mostra se tiver algum item cadastrado
+    var stats = landing.stats || [];
+    if (stats.length) {
+      var statsWrap = document.querySelector("[data-stats]");
+      statsWrap.style.display = "";
+      stats.forEach(function (s) {
+        var div = document.createElement("div");
+        div.className = "landing-stat";
+        div.innerHTML = "<b>" + escapeHtml(s.value) + "</b><span>" + escapeHtml(s.label) + "</span>";
+        statsWrap.appendChild(div);
+      });
+    }
+
+    // O que você recebe
+    var highlights = landing.highlights || [];
     var hWrap = document.querySelector("[data-highlights]");
     highlights.forEach(function (h) {
       var div = document.createElement("div");
@@ -93,6 +146,51 @@
       hWrap.appendChild(div);
     });
 
+    // Sobre o mentor
+    var about = landing.about || {};
+    if (about.title || about.text) {
+      var aboutWrap = document.querySelector("[data-about]");
+      aboutWrap.style.display = "";
+      aboutWrap.innerHTML =
+        (about.image_url ? '<div class="landing-about__photo" style="background-image:url(\'' + about.image_url + '\')"></div>' : "") +
+        '<div class="landing-about__text"><h2 class="landing-section-title" style="text-align:left">' + escapeHtml(about.title || "") + '</h2><p>' + escapeHtml(about.text || "") + '</p></div>';
+    }
+
+    // Depoimentos — só mostra a seção se tiver pelo menos 1 real cadastrado
+    var testimonials = landing.testimonials || [];
+    if (testimonials.length) {
+      document.querySelector("[data-nav-depoimentos]").style.display = "";
+      document.querySelector("[data-testimonials-wrap]").style.display = "";
+      var tWrap = document.querySelector("[data-testimonials]");
+      testimonials.forEach(function (t) {
+        var div = document.createElement("div");
+        div.className = "card-flat landing-testimonial";
+        div.innerHTML =
+          '<p>"' + escapeHtml(t.text) + '"</p>' +
+          '<div class="landing-testimonial__who"><b>' + escapeHtml(t.name) + '</b>' + (t.role ? '<span>' + escapeHtml(t.role) + '</span>' : "") + '</div>';
+        tWrap.appendChild(div);
+      });
+    }
+
+    // Plano / preço — só mostra se o admin preencher um título
+    var pricing = landing.pricing || {};
+    if (pricing.title) {
+      document.querySelector("[data-nav-planos]").style.display = "";
+      var pWrap = document.querySelector("[data-pricing-wrap]");
+      pWrap.style.display = "";
+      var features = (pricing.features || []).map(function (f) {
+        return '<li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>' + escapeHtml(f) + '</li>';
+      }).join("");
+      pWrap.innerHTML =
+        '<div class="landing-pricing__card">' +
+          '<h3>' + escapeHtml(pricing.title) + '</h3>' +
+          (pricing.price ? '<div class="landing-pricing__price">' + escapeHtml(pricing.price) + (pricing.period ? '<span>/' + escapeHtml(pricing.period) + '</span>' : "") + '</div>' : "") +
+          (features ? '<ul class="landing-pricing__features">' + features + '</ul>' : "") +
+          '<a class="btn btn--block" href="' + escapeHtml(pricing.cta_url || landing.cta_url || "#") + '" target="_blank" rel="noopener"><span>' + escapeHtml(pricing.cta_label || landing.cta_label || "Quero fazer parte") + '</span></a>' +
+        '</div>';
+    }
+
+    // FAQ
     var faq = (content.suporte && content.suporte.faq) || [];
     var fWrap = document.querySelector("[data-faq]");
     faq.forEach(function (f) {

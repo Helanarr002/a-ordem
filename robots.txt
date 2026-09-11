@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /landing.html
+Disallow: /index.html
+Disallow: /curso.html
+Disallow: /aula.html
+Disallow: /admin.html
+Disallow: /login.html
+
+Sitemap: https://comunidade.vip/a-ordem/sitemap.xml

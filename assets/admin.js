@@ -157,14 +157,67 @@
 
     var highlights = Array.isArray(landing.highlights) ? landing.highlights : [];
     landing.highlights = highlights;
-    var editor = $('[data-editor="landing_highlights"]');
-    var fields = [{ key: "title", label: "Título" }, { key: "text", label: "Texto", type: "textarea" }];
-    renderArrayEditor(editor, highlights, fields);
+    var hEditor = $('[data-editor="landing_highlights"]');
+    var hFields = [{ key: "title", label: "Título" }, { key: "text", label: "Texto", type: "textarea" }];
+    renderArrayEditor(hEditor, highlights, hFields);
     $('[data-add="landing_highlights"]').addEventListener("click", function () {
       highlights.push({ title: "", text: "" });
-      renderArrayEditor(editor, highlights, fields);
+      renderArrayEditor(hEditor, highlights, hFields);
     });
     $('[data-save="landing_highlights"]').addEventListener("click", async function () {
+      await setContent("landing", landing);
+    });
+
+    var stats = Array.isArray(landing.stats) ? landing.stats : [];
+    landing.stats = stats;
+    var sEditor = $('[data-editor="landing_stats"]');
+    var sFields = [{ key: "value", label: "Número (ex: 8+)" }, { key: "label", label: "Legenda (ex: anos de mercado)" }];
+    renderArrayEditor(sEditor, stats, sFields);
+    $('[data-add="landing_stats"]').addEventListener("click", function () {
+      stats.push({ value: "", label: "" });
+      renderArrayEditor(sEditor, stats, sFields);
+    });
+    $('[data-save="landing_stats"]').addEventListener("click", async function () {
+      await setContent("landing", landing);
+    });
+
+    var aboutForm = $('[data-form="landing_about"]');
+    landing.about = landing.about || {};
+    fillForm(aboutForm, landing.about);
+    aboutForm.querySelector('[data-upload-for="image_url"]').addEventListener("change", async function (e) {
+      var url = await uploadMedia(e.target.files[0], "landing");
+      if (url) aboutForm.querySelector('[name="image_url"]').value = url;
+    });
+    aboutForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      Object.assign(landing.about, formToObject(this));
+      await setContent("landing", landing);
+    });
+
+    var testimonials = Array.isArray(landing.testimonials) ? landing.testimonials : [];
+    landing.testimonials = testimonials;
+    var tEditor = $('[data-editor="landing_testimonials"]');
+    var tFields = [{ key: "name", label: "Nome" }, { key: "role", label: "Cidade/ocupação (opcional)" }, { key: "text", label: "Depoimento", type: "textarea" }];
+    renderArrayEditor(tEditor, testimonials, tFields);
+    $('[data-add="landing_testimonials"]').addEventListener("click", function () {
+      testimonials.push({ name: "", role: "", text: "" });
+      renderArrayEditor(tEditor, testimonials, tFields);
+    });
+    $('[data-save="landing_testimonials"]').addEventListener("click", async function () {
+      await setContent("landing", landing);
+    });
+
+    var pricingForm = $('[data-form="landing_pricing"]');
+    landing.pricing = landing.pricing || {};
+    fillForm(pricingForm, landing.pricing);
+    pricingForm.querySelector('[name="features_text"]').value = (landing.pricing.features || []).join("\n");
+    pricingForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      var data = formToObject(this);
+      var featuresText = data.features_text || "";
+      delete data.features_text;
+      data.features = featuresText.split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+      Object.assign(landing.pricing, data);
       await setContent("landing", landing);
     });
   }

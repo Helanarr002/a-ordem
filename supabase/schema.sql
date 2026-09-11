@@ -257,6 +257,10 @@ insert into public.site_content (key, data) values
     {"title": "Trilha completa", "text": "8 módulos, do zero até os setups da Ordem."},
     {"title": "Mentorias ao vivo", "text": "Toda terça às 20h, com gravação liberada depois."},
     {"title": "Sala de Sinais", "text": "Bônus atualizado toda semana com os setups mapeados."}
-  ]
+  ],
+  "stats": [],
+  "about": {},
+  "testimonials": [],
+  "pricing": {}
 }')
 on conflict (key) do nothing;
