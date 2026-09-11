@@ -46,6 +46,7 @@
     <button data-panel="mentorias">Mentorias Ao Vivo</button>
     <button data-panel="sinais">Sala de Sinais</button>
     <button data-panel="suporte">Suporte</button>
+    <button data-panel="login">Tela de Login</button>
     <button data-panel="usuarios">Usuários &amp; Licenças</button>
   </aside>
 
@@ -241,6 +242,29 @@
       <div data-editor="suporte_faq"></div>
       <button class="btn btn--ghost" type="button" data-add="suporte_faq">+ Adicionar pergunta</button>
       <div style="margin-top:14px"><button class="btn" data-save="suporte_faq">Salvar FAQ</button></div>
+    </section>
+
+    <!-- LOGIN -->
+    <section class="admin-panel" data-panel-content="login">
+      <h2>Tela de Login</h2>
+      <p class="hint">Textos da página login.html (lado da frase e lado do formulário).</p>
+      <form class="admin-form" data-form="login">
+        <label>Frase de efeito (lado esquerdo)</label><textarea name="quote_title"></textarea>
+        <label>Texto abaixo da frase</label><textarea name="quote_text"></textarea>
+        <div class="row2">
+          <div><label>Título do formulário</label><input name="form_title"></div>
+          <div><label>Texto abaixo do título</label><input name="form_subtitle"></div>
+        </div>
+        <div class="row2">
+          <div><label>Texto do rodapé ("Ainda não é membro?")</label><input name="footer_text"></div>
+          <div><label>Texto do link do rodapé</label><input name="footer_cta_label"></div>
+        </div>
+        <button class="btn" type="submit">Salvar textos do login</button>
+      </form>
+      <h3 style="font-size:15px;margin:26px 0 10px">Números (ex: "8 módulos")</h3>
+      <div data-editor="login_badges"></div>
+      <button class="btn btn--ghost" type="button" data-add="login_badges">+ Adicionar número</button>
+      <div style="margin-top:14px"><button class="btn" data-save="login_badges">Salvar números</button></div>
     </section>
 
     <!-- USUÁRIOS -->

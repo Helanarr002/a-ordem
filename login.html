@@ -39,9 +39,9 @@
     </a>
 
     <div class="auth__quote">
-      <h2>O mercado não recompensa quem tenta. Recompensa quem tem método.</h2>
-      <p>Sua área de membros com a trilha completa, as mentorias ao vivo e a Sala de Sinais — tudo em um só lugar.</p>
-      <div class="auth__badges">
+      <h2 data-content="login.quote_title">O mercado não recompensa quem tenta. Recompensa quem tem método.</h2>
+      <p data-content="login.quote_text">Sua área de membros com a trilha completa, as mentorias ao vivo e a Sala de Sinais — tudo em um só lugar.</p>
+      <div class="auth__badges" data-login-badges>
         <div><b>8</b> módulos</div>
         <div><b>74</b> aulas</div>
         <div><b>terça 20h</b> ao vivo</div>
@@ -52,8 +52,8 @@
   <!-- Lado do formulário -->
   <div class="auth__form-side">
     <form class="auth__card" data-login>
-      <h1>Entrar na área de membros</h1>
-      <p>Use o e-mail que você cadastrou na compra.</p>
+      <h1 data-content="login.form_title">Entrar na área de membros</h1>
+      <p data-content="login.form_subtitle">Use o e-mail que você cadastrou na compra.</p>
 
       <div class="field">
         <label for="email">E-mail</label>
@@ -74,7 +74,7 @@
 
       <button class="btn btn--block" type="submit"><span>Entrar</span></button>
 
-      <p class="auth__foot">Ainda não é membro? <a href="landing.html">Conheça A ORDEM</a></p>
+      <p class="auth__foot"><span data-content="login.footer_text">Ainda não é membro?</span> <a href="landing.html" data-content="login.footer_cta_label">Conheça A ORDEM</a></p>
     </form>
   </div>
 
@@ -87,7 +87,23 @@
 <script>
 (function () {
   "use strict";
-  if (window.SiteContent) SiteContent.init(["brand", "design_tokens"]);
+  if (window.SiteContent) {
+    SiteContent.init(["brand", "design_tokens", "login"]).then(function (content) {
+      var badges = (content.login && content.login.badges) || [];
+      if (badges.length) {
+        var wrap = document.querySelector("[data-login-badges]");
+        wrap.innerHTML = "";
+        badges.forEach(function (b) {
+          var div = document.createElement("div");
+          var bEl = document.createElement("b");
+          bEl.textContent = b.value || "";
+          div.appendChild(bEl);
+          div.appendChild(document.createTextNode(" " + (b.label || "")));
+          wrap.appendChild(div);
+        });
+      }
+    });
+  }
 
   var params = new URLSearchParams(window.location.search);
   var blocked = params.get("blocked");

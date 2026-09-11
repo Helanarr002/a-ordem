@@ -248,6 +248,19 @@ insert into public.site_content (key, data) values
   "email": "",
   "faq": []
 }'),
+('login', '{
+  "quote_title": "O mercado não recompensa quem tenta. Recompensa quem tem método.",
+  "quote_text": "Sua área de membros com a trilha completa, as mentorias ao vivo e a Sala de Sinais — tudo em um só lugar.",
+  "form_title": "Entrar na área de membros",
+  "form_subtitle": "Use o e-mail que você cadastrou na compra.",
+  "footer_text": "Ainda não é membro?",
+  "footer_cta_label": "Conheça A ORDEM",
+  "badges": [
+    {"value": "8", "label": "módulos"},
+    {"value": "74", "label": "aulas"},
+    {"value": "terça 20h", "label": "ao vivo"}
+  ]
+}'),
 ('landing', '{
   "headline": "O mercado não recompensa quem tenta. Recompensa quem tem método.",
   "subheadline": "A comunidade de traders de Genisson Silva FX: trilha completa, mentorias ao vivo e Sala de Sinais.",

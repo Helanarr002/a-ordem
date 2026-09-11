@@ -259,6 +259,29 @@
     });
   }
 
+  async function initLoginPanel() {
+    var data = await getContent("login");
+    fillForm($('[data-form="login"]'), data);
+    $('[data-form="login"]').addEventListener("submit", async function (e) {
+      e.preventDefault();
+      Object.assign(data, formToObject(this));
+      await setContent("login", data);
+    });
+
+    var badges = Array.isArray(data.badges) ? data.badges : [];
+    data.badges = badges;
+    var editor = $('[data-editor="login_badges"]');
+    var fields = [{ key: "value", label: "Número (ex: 8)" }, { key: "label", label: "Legenda (ex: módulos)" }];
+    renderArrayEditor(editor, badges, fields);
+    $('[data-add="login_badges"]').addEventListener("click", function () {
+      badges.push({ value: "", label: "" });
+      renderArrayEditor(editor, badges, fields);
+    });
+    $('[data-save="login_badges"]').addEventListener("click", async function () {
+      await setContent("login", data);
+    });
+  }
+
   /* ---- CURSOS: módulos + aulas ------------------------------------- */
   async function initCursos() {
     var moduleForm = $('[data-form="module"]');
@@ -573,6 +596,7 @@
     initPostsPanel("mentoria");
     initPostsPanel("sinal");
     initSuporte();
+    initLoginPanel();
     initUsuarios();
   });
 })();
